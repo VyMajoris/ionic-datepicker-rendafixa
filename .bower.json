@@ -1,0 +1,31 @@
+{
+  "name": "ionic-datepicker-vymajoris",
+  "version": "1.2.1",
+  "authors": [
+    "Eduardo Araujo <eduardo.araujoihs@gmail.com>"
+  ],
+  "description": "A date picker for ionic framework",
+  "main": [
+    "./dist/ionic-datepicker.bundle.min.js"
+  ],
+  "keywords": [
+    "ionic-datepicker",
+    "ionic",
+    "datepicker",
+    "datepicker for ionic",
+    "datepicker for ionic framework",
+    "datepicker for ionic framework extended"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/vymajoris",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ionic": ">=0.9.27"
+  }
+}

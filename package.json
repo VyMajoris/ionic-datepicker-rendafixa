@@ -1,0 +1,19 @@
+{
+  "name": "ionic-datepicker-rendafixa",
+  "version": "1.2.1",
+  "description": "A date picker for ionic framework, for App Renda Fixa",
+  "main": "./dist/ionic-datepicker.bundle.min.js",
+  "scripts": {},
+  "author": "https://github.com/vymajoris, eduardo.araujoihs@gmail.com",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "*",
+    "del": "*",
+    "gulp-concat": "*",
+    "gulp-css2js": "*",
+    "gulp-minify-html": "*",
+    "gulp-ng-html2js": "*",
+    "gulp-uglify": "*"
+  }
+}
