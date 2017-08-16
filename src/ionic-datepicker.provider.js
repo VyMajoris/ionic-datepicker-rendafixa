@@ -21,7 +21,8 @@ angular.module('ionic-datepicker.provider', [])
       angular.extend(config, inputObj);
     };
 
-    this.$get = ['$rootScope', '$ionicPopup', '$ionicModal', 'IonicDatepickerService', function ($rootScope, $ionicPopup, $ionicModal, IonicDatepickerService) {
+    this.$get = ['$rootScope', '$ionicPopup', '$ionicModal', 'IonicDatepickerService', '$q',
+      function ($rootScope, $ionicPopup, $ionicModal, IonicDatepickerService, $q) {
 
       var provider = {};
 
@@ -65,7 +66,7 @@ angular.module('ionic-datepicker.provider', [])
         changeDaySelected();
       };
 
-      var changeDaySelected = function() {
+      var changeDaySelected = function () {
         var newSelectedDate = new Date($scope.selctedDateEpoch);
         newSelectedDate.setMonth($scope.currentDate.getMonth());
         newSelectedDate.setYear($scope.currentDate.getFullYear());
@@ -208,23 +209,38 @@ angular.module('ionic-datepicker.provider', [])
         setDisabledDates($scope.mainObj);
       }
 
-      $ionicModal.fromTemplateUrl('ionic-datepicker-modal.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-      }).then(function (modal) {
-        $scope.modal = modal;
-      });
+
+      var init = function () {
+        if ($scope.modal) {
+          return $q.when();
+        }
+        else {
+          return $ionicModal.fromTemplateUrl('ionic-datepicker-modal.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+          }).then(function (modal) {
+            $scope.modal = modal;
+          });
+        }
+      };
+
 
       $scope.$on('$destroy', function () {
         $scope.modal.remove();
       });
 
       function openModal() {
-        $scope.modal.show();
+        init().then(function () {
+          $scope.modal.show();
+        });
+
       }
 
       function closeModal() {
-        $scope.modal.hide();
+        $scope.modal.remove()
+          .then(function() {
+            $scope.modal = null;
+          });
       }
 
       $scope.closeIonicDatePickerModal = function () {

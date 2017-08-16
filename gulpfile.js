@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var del = require('del');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
 var ngHtml2Js = require("gulp-ng-html2js");
 var minifyHtml = require("gulp-minify-html");
 var css2js = require("gulp-css2js");
@@ -24,20 +25,21 @@ gulp.task('css2js', function () {
     .pipe(gulp.dest("./dist/"));
 });
 
-gulp.task('make-bundle', ['html2js', 'css2js'], function () {
+gulp.task('make-bundle', ['del', 'html2js', 'css2js'], function () {
   return gulp.src(['./dist/*', './src/*.js'])
     .pipe(concat('ionic-datepicker.bundle.js'))
-    .pipe(gulp.dest('./dist/'));
-});
-
-gulp.task('make-bundle-min', ['html2js', 'css2js'], function () {
-  return gulp.src(['./dist/*', './src/*.js'])
-    .pipe(concat('ionic-datepicker.bundle.min.js'))
+    // This will output the non-minified version
+    .pipe(gulp.dest('./dist'))
+    // This will minify and rename to foo.min.js
     .pipe(uglify())
-    .pipe(gulp.dest('./dist/'));
+    .pipe(rename({ extname: '.min.js' }))
+    .pipe(gulp.dest('./dist'));
+
+
+
 });
 
-gulp.task('del-temp-files', ['make-bundle', 'make-bundle-min'], function () {
+gulp.task('del-temp-files', ['make-bundle'], function () {
   del(['./dist/templates.js', './dist/ionic-datepicker.styles.js']);
 });
 
