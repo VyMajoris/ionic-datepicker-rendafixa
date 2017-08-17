@@ -165,6 +165,11 @@
   font-weight: bold;
 }
 
+.ionic_datepicker_modal .pointer_events_none > i {
+  pointer-events: none;
+  color: #aaaaaa !important;
+}
+
 .ionic_datepicker_modal .pointer_events_none {
   pointer-events: none;
   color: #aaaaaa !important;
