@@ -100,7 +100,8 @@ angular.module('ionic-datepicker.provider', [])
             newSelectedDate.setMonth($scope.currentDate.getMonth());
             newSelectedDate.setYear($scope.currentDate.getFullYear());
 
-            if ($scope.mainObj.disableWeekdays = [0, 6]) {
+            if ($scope.mainObj.disableWeekdays.indexOf(0) > -1
+                && $scope.mainObj.disableWeekdays.indexOf(6) > -1 ) {
               $scope.selctedDateEpoch = preventWeekend(newSelectedDate);
             } else {
               $scope.selctedDateEpoch = preventOutsideLimit(newSelectedDate.getTime());
@@ -165,6 +166,7 @@ angular.module('ionic-datepicker.provider', [])
             $scope.monthsList = [];
             if ($scope.mainObj.monthsList && $scope.mainObj.monthsList.length === 12) {
               $scope.monthsList = $scope.mainObj.monthsList;
+
             } else {
               $scope.monthsList = IonicDatepickerService.monthsList;
             }
